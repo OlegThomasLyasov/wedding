@@ -33,8 +33,9 @@
         <div class="absolute inset-0 bg-black bg-opacity-30"></div>
         <div class="relative z-10 text-center px-4 py-16 max-w-4xl mx-auto">
             <h1 class="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">Камила & Олег</h1>
-            <p class="text-xl md:text-2xl text-white mb-8">Приглашаем вас на нашу свадьбу</p>
             <p class="text-2xl md:text-3xl text-white mb-12">6 сентября 2025 года</p>
+            <p class="text-2xl md:text-3xl text-white mb-12">до свадьбы осталось: <span id="countdown"></span></p>
+
             <div class="animate-bounce mt-12">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-white cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="scrollMain()">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -48,8 +49,8 @@
         <div class="text-center mb-16">
             <h2 class="font-playfair text-3xl md:text-4xl font-bold text-rose-700 mb-6">Дорогие родные и друзья!</h2>
             <p class="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                Мы рады сообщить вам, что 6 сентября 2025 года мы станем мужем и женой!
-                Будем счастливы разделить с вами этот особенный день в нашей жизни.
+                Мы рады сообщить Вам, что 6 сентября 2025 года мы станем мужем и женой!
+                Приглашаем Вас разделить радость особенного для нас события и стать частью нашей семейной истории!
             </p>
         </div>
 
@@ -65,7 +66,7 @@
                 <p class="text-rose-600 font-medium">16:30</p>
             </div>
 
-            <div class="bg-white p-8 rounded-lg shadow-lg text-center cursor-pointer" onclick="scrollMap()">
+            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
                 <div class="text-rose-600 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -74,7 +75,8 @@
                 </div>
                 <h3 class="font-playfair text-2xl font-bold mb-4">Место проведения</h3>
                 <p class="mb-2">Ресторан "Хотим-едим"</p>
-                <p class="text-gray-600">ул. Красивая поляна, 4/1, г. Уфа</p>
+                <p class="text-gray-600">г. Уфа, ул. Красивая поляна 4/1</p>
+                <a class="mt-2 text-gray-600 underline cursor-pointer" onclick="scrollMap()">Посмотреть на карте</a>
             </div>
         </div>
 
@@ -83,11 +85,11 @@
             <div class="max-w-2xl mx-auto">
                 <div class="mb-8 pb-8 border-b border-rose-200">
                     <h3 class="font-playfair text-xl font-bold text-rose-600 mb-2">16:30 - 17:00</h3>
-                    <p class="text-lg">Встреча гостей</p>
+                    <p class="text-lg">Сбор гостей, фуршет, новые знакомства</p>
                 </div>
                 <div class="mb-8 pb-8 border-b border-rose-200">
                     <h3 class="font-playfair text-xl font-bold text-rose-600 mb-2">17:00 - 17:30</h3>
-                    <p class="text-lg">Выездная регистрация</p>
+                    <p class="text-lg">Выездная церемония</p>
                 </div>
                 <div class="mb-8">
                     <h3 class="font-playfair text-xl font-bold text-rose-600 mb-2">17:30 - 23:00</h3>
@@ -153,23 +155,39 @@
     <section class="max-w-2xl mx-auto px-4 pb-16">
         <div class="bg-white p-8 rounded-lg shadow-lg">
             <h2 class="font-playfair text-3xl font-bold text-rose-700 mb-8 text-center">Подтвердите, пожалуйста, ваше присутствие</h2>
-            <form action="https://formspree.io/your-email@example.com" method="POST">
+            <form id="contact-form" action="" method="POST">
                 <div class="mb-6">
-                    <label for="name" class="block text-gray-700 mb-2">Ваше имя</label>
+                    <label for="name" class="block text-gray-700 mb-2">Ваше имя:</label>
                     <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300">
-                </div>
-                <div class="mb-6">
-                    <label for="email" class="block text-gray-700 mb-2">Email или телефон</label>
-                    <input type="text" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300">
+                    <!-- <select id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300">
+                        <option value="">-- Выберите из списка --</option>
+                        <option value="mom_elmyra">Мама Эльмира</option>
+                        <option value="guzel">Гузель</option>
+                        <option value="aunt_vasilya">Тётя Василя и Дядя Рафиль</option>
+                        <option value="ilnur_family">Семья Ильнура</option>
+                        <option value="nikita_borisov">Никита Борисов</option>
+                        <option value="yulia_zinnatullina">Юля Зиннатуллина</option>
+                        <option value="varvara_vlasova">Варвара Власова</option>
+                        <option value="maryam_fatkulina">Марьям Фаткулина</option>
+                        <option value="albert">Альберт</option>
+                        <option value="tatyana_maratovna">Татьяна Маратовна</option>
+                        <option value="nikita_utkin">Никита Уткин с женой</option>
+                        <option value="mom_oksana">Мама Оксана и Папа Владислав</option>
+                        <option value="uncle_sasha">Дядя Саша с женой</option>
+                        <option value="roma_fetisov">Рома Фетисов</option>
+                        <option value="erik_gumerov">Эрик Гумеров</option>
+                        <option value="oleg_gareev">Олег Гареев</option>
+                        <option value="timofey_glotkin">Тимофей Глоткин</option>
+                    </select> -->
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 mb-4">Вы придёте?</label>
                     <div class="flex items-center mb-2">
-                        <input type="radio" id="yes" name="attendance" class="mr-2">
+                        <input type="radio" id="yes" name="attendance" value="yes" class="mr-2">
                         <label for="yes">С радостью приду!</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="radio" id="no" name="attendance" class="mr-2">
+                        <input type="radio" id="no" name="attendance" value="no" class="mr-2">
                         <label for="no">К сожалению, не смогу</label>
                     </div>
                 </div>
