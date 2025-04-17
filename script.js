@@ -7,38 +7,38 @@ function scrollMap() {
 
 // Инициализация карты после загрузки страницы
 ymaps.ready(init);
-        
+
 function init() {
     // Создание карты
     const myMap = new ymaps.Map("map", {
         center: [54.665427, 55.863362],
         zoom: 15,
     });
-    
+
     // Добавление метки
     const myPlacemark = new ymaps.Placemark([54.665427, 55.863362], {
         hintContent: 'Свадьба тут:)',
         balloonContent: '<div class="flex gap-3"><img src="./images/smallShater.webp" width="126px" height="96px"><div class="flex flex-col gap-2"><h3 class="font-bold">Малый шатер (шатер №2)</h3> <p>Уфа, Красивая поляна 4/1</p>  </div></div>'
     });
-    
+
     myMap.geoObjects.add(myPlacemark);
 }
 
 // форма
-document.addEventListener('DOMContentLoaded', ()=> {
+document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Получаем значения полей формы
             const nameInput = document.querySelector('input[name="name"]');
             const nameText = nameInput.value;
-            
+
             const attendanceInput = document.querySelector('input[name="attendance"]');
             const attendanceText = attendanceInput.value;
-            
+
             // Отправка данных через Fetch API
             fetch('https://formspree.io/f/manevaze', {
                 method: 'POST',
@@ -57,27 +57,49 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 // таймер
 
+function getDeclension(number, words) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return words[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[Math.min(number % 10, 5)]];
+}
+
 // Устанавливаем дату окончания
 const countdownDate = new Date("September 6, 2025 00:00:00").getTime();
 
 // Обновляем таймер каждую секунду
-const x = setInterval(function() {
-const now = new Date().getTime();
-const distance = countdownDate - now;
+const x = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
 
-// Вычисляем время
-const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Вычисляем время
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-// Отображаем результат
-document.getElementById("countdown").innerHTML = 
-    days + "д " + hours + "ч " + minutes + "м " + seconds + "с ";
+    // Отображаем результат
+    const dayTag = document.getElementById("days");
+    const daysP = document.getElementById("daysP");
+    dayTag.innerText = days;
+    daysP.innerHTML = getDeclension(days, ['день', 'дня', 'дней']);
+    
+    const hourTag = document.getElementById("hours");
+    const hoursP = document.getElementById("hoursP");
+    hourTag.innerText = hours;
+    hoursP.innerHTML = getDeclension(days, ['час', 'часа', 'часов']);
 
-// Если отсчет завершен, выводим сообщение
-if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("countdown").innerHTML = "Время вышло!";
-}
+    const minutesTag = document.getElementById("minutes");
+    const minP = document.getElementById("minP");
+    minutesTag.innerText = minutes;
+    minP.innerHTML = getDeclension(days, ['минута', 'минуты', 'минут']);
+
+    const secundTag = document.getElementById("secunds");
+    const secP = document.getElementById("secP");
+    secundTag.innerText = seconds;
+    secP.innerHTML = getDeclension(days, ['секунда', 'секунды', 'секунд']);
+
+    // Если отсчет завершен, выводим сообщение
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Время вышло!";
+    }
 }, 1000);
