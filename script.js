@@ -57,9 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // таймер
 
-function getDeclension(number, words) {
-    const cases = [2, 0, 1, 1, 1, 2];
-    return words[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[Math.min(number % 10, 5)]];
+function getNoun(number, one, two, five) {
+    let n = Math.abs(number);
+    n %= 100;
+    if (n >= 5 && n <= 20) {
+      return five;
+    }
+    n %= 10;
+    if (n === 1) {
+      return one;
+    }
+    if (n >= 2 && n <= 4) {
+      return two;
+    }
+    return five;
 }
 
 // Устанавливаем дату окончания
@@ -75,27 +86,27 @@ const x = setInterval(function () {
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+    
     // Отображаем результат
     const dayTag = document.getElementById("days");
     const daysP = document.getElementById("daysP");
     dayTag.innerText = days;
-    daysP.innerHTML = getDeclension(days, ['день', 'дня', 'дней']);
+    daysP.innerHTML = getNoun(days, 'день', 'дня', 'дней');
     
     const hourTag = document.getElementById("hours");
     const hoursP = document.getElementById("hoursP");
     hourTag.innerText = hours;
-    hoursP.innerHTML = getDeclension(days, ['час', 'часа', 'часов']);
+    hoursP.innerHTML = getNoun(hours, 'час', 'часа', 'часов');
 
     const minutesTag = document.getElementById("minutes");
     const minP = document.getElementById("minP");
     minutesTag.innerText = minutes;
-    minP.innerHTML = getDeclension(days, ['минута', 'минуты', 'минут']);
+    minP.innerHTML = getNoun(minutes, 'минута', 'минуты', 'минут');
 
     const secundTag = document.getElementById("secunds");
     const secP = document.getElementById("secP");
     secundTag.innerText = seconds;
-    secP.innerHTML = getDeclension(days, ['секунда', 'секунды', 'секунд']);
+    secP.innerHTML = getNoun(seconds, 'секунда', 'секунды', 'секунд');
 
     // Если отсчет завершен, выводим сообщение
     if (distance < 0) {
