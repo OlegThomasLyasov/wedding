@@ -1,8 +1,5 @@
-function scrollMain() {
-    document.getElementById("main").scrollIntoView({ block: "start", behavior: "smooth" });
-}
-function scrollMap() {
-    document.getElementById("mapTitle").scrollIntoView({ block: "start", behavior: "smooth" });
+function scrollToBlock(id) {
+    document.getElementById(id).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
 // Инициализация карты после загрузки страницы
@@ -17,11 +14,28 @@ function init() {
 
     // Добавление метки
     const myPlacemark = new ymaps.Placemark([54.665427, 55.863362], {
-        hintContent: 'Свадьба тут:)',
+        hintContent: 'Свадьба тут!',
         balloonContent: '<div class="flex gap-3"><img src="./images/smallShater.webp" width="126px" height="96px"><div class="flex flex-col gap-2"><h3 class="font-bold">Малый шатер (шатер №2)</h3> <p>Уфа, Красивая поляна 4/1</p>  </div></div>'
     });
 
     myMap.geoObjects.add(myPlacemark);
+}
+
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const checkbox = document.querySelector(`input[onchange*="${sectionId}"]`);
+    section.classList.toggle('hidden', !checkbox.checked);
+}
+
+function toggleDrinksSection() {
+    const drinksSection = document.getElementById('main-drinks-section');
+    const isAttending = document.getElementById('yes').checked;
+    
+    if (isAttending) {
+        drinksSection.classList.remove('hidden');
+    } else {
+        drinksSection.classList.add('hidden');
+    }
 }
 
 // форма
@@ -32,31 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Получаем значения полей формы
-            const nameInput = document.querySelector('input[name="name"]');
-            const nameText = nameInput.value;
-
-            const attendanceInput = document.querySelector('input[name="attendance"]');
-            const attendanceText = attendanceInput.value;
-
             // Отправка данных через Fetch API
-            fetch('https://formspree.io/f/manevaze', {
+            fetch(this.action, {
                 method: 'POST',
+                body: new FormData(this),
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: nameText,
-                    attendance: attendanceText
-                })
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Форма успешно отправлена!');
+                    location.reload();
+                } else {
+                    throw new Error('Ошибка отправки формы');
+                }
+            })
+            .catch(error => {
+                alert('Произошла ошибка: ' + error.message);
             });
         });
     }
 });
 
 // таймер
-
 function getNoun(number, one, two, five) {
     let n = Math.abs(number);
     n %= 100;

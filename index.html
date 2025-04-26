@@ -79,7 +79,7 @@
                 </div>
                 <div class="animate-bounce">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-white cursor-pointer"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="scrollMain()">
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="scrollToBlock('main')">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
@@ -127,7 +127,7 @@
                 <p class="text-xl text-gray-700 mb-2">Ресторан "Хотим-едим"</p>
                 <p class="text-xl text-gray-700 mb-2">г. Уфа, ул. Красивая поляна 4/1</p>
                 <a class="text-xl hover:text-[#7AAB7A] text-[#8FBC8F] transition underline cursor-pointer"
-                    onclick="scrollMap()">Посмотреть на
+                    onclick="scrollToBlock('mapTitle')">Посмотреть на
                     карте</a>
             </div>
         </div>
@@ -161,7 +161,7 @@
                 <br> Надеемся, что вы готовы вкусно есть, много веселиться и танцевать! <br>
                 Поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре торжества!
             </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-xl">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 rounded-xl">
                 <!-- Золотисто-бежевый -->
                 <div class="w-24 h-24 rounded-full bg-[#E6C79C] border-4 border-[#E6C79C] shadow-lg transform hover:scale-110 transition-transform duration-300"></div>
                 <!-- Серебристый -->
@@ -170,6 +170,8 @@
                 <div class="w-24 h-24 rounded-full bg-[#D8A7A7] border-4 border-[#D8A7A7] shadow-lg transform hover:scale-110 transition-transform duration-300"></div>
                 <!-- Слоновая кость -->
                 <div class="w-24 h-24 rounded-full bg-[#FFF9F2] border-4 border-[#FFF9F2] shadow-lg transform hover:scale-110 transition-transform duration-300"></div>
+                <!-- Оливковый -->
+                <div class="col-span-2 justify-self-center md:col-span-1 w-24 h-24 rounded-full bg-[#808000] border-4 border-[#808000] shadow-lg transform hover:scale-110 transition-transform duration-300"></div>
             </div>
         </div>
     </section>
@@ -180,51 +182,38 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
                     <img src="./images/ours/1.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <div class="translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                          <p class="font-playfair md:text-2xl text-white mb-2">"Навсегда и на один день"</p>
-                          <p class="text-[#E6C79C] font-light">Олег & Камила</p>
-                        </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
+                        <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
-                    <img src="./images/ours/2.jpg" class="w-full h-full object-cover">
+                    <img src="./images/ours/12.jpg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
                         <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
                     <img src="./images/ours/3.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <div class="translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                          <p class="font-playfair md:text-2xl text-white mb-2">#ОлегиКамила<br>
-                            #6сентября2025<br>
-                            #Навсегда</p>
-                          <p class="text-[#E6C79C] font-light">Олег & Камила</p>
-                        </div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
+                        <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
                     <img src="./images/ours/5.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 flex items-end pb-8 justify-center text-center opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-black via-transparent to-transparent">
-                        <p class="text-[#FFF9F2] md:text-2xl max-w-xs px-4">
-                          "Вечер, свечи, два сердца -
-                          больше нам ничего не надо"
-                        </p>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
+                        <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
                     <img src="./images/ours/4.jpg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
-                        <p class="p-6 text-white md:text-2xl font-playfair italic">"Два кольца - одна судьба"</p>
+                        <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
                 <div class="relative aspect-square group rounded-lg overflow-hidden">
                     <img src="./images/ours/6.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 flex items-end pb-8 justify-center text-center opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-t from-black via-transparent to-transparent">
-                        <p class="text-[#FFF9F2] md:text-2xl max-w-xs px-4">
-                            "Улыбки, которые говорят сами за себя"
-                        </p>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-black/30 transition duration-300">
+                        <p class="p-6 text-white md:text-2xl font-playfair italic">"И в радости, и в любви"</p>
                     </div>
                 </div>
             </div>
@@ -234,7 +223,7 @@
     <section class="pb-16" id="mapTitle">
         <h2 class="font-playfair text-3xl md:text-4xl font-bold text-[#5E7C5E] mb-12 text-center">Место проведения
         </h2>
-        <div id="map" class="px-4"></div>
+        <div id="map" class="px-4 max-w-7xl mx-auto"></div>
         <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 pt-12 px-4">
             <div class="aspect-square rounded-lg overflow-hidden">
                 <img src="./images/hotimEdim/1.webp" class="w-full h-full">
@@ -312,21 +301,44 @@
         <div class="p-8 rounded-lg bg-white/80 backdrop-blur-sm border border-white/30 shadow-lg">
             <h2 class="font-playfair text-3xl font-bold text-[#5E7C5E] mb-8 text-center">Просим вас подтвердить свое
                 присутствие и заполнить форму ниже</h2>
-            <form id="contact-form" action="" method="POST">
-                <div class="mb-6 text-xl">
+            <form id="contact-form" class="flex flex-col gap-6 text-xl" action="https://formspree.io/f/manevaze" method="POST">
+                <div>
                     <label for="name" class="block mb-2">Ваше имя:</label>
-                    <input type="text" id="name"
+                    <input type="text" id="name" name="name"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300">
                 </div>
-                <div class="mb-6 text-xl">
+                <div>
                     <label class="block mb-4">Планируете ли вы присутствовать на свадьбе?</label>
                     <div class="flex items-center mb-2">
-                        <input type="radio" id="yes" name="attendance" value="yes" class="mr-2">
+                        <input type="radio" id="yes" name="attendance" value="yes" class="mr-2" onchange="toggleDrinksSection()" >
                         <label for="yes">Да, с удовольствием!</label>
                     </div>
                     <div class="flex items-center">
-                        <input type="radio" id="no" name="attendance" value="no" class="mr-2">
+                        <input type="radio" id="no" name="attendance" value="no" class="mr-2" onchange="toggleDrinksSection()">
                         <label for="no">К сожалению, не смогу</label>
+                    </div>
+                </div>
+                <div id="main-drinks-section" class="hidden">
+                    <label class="block mb-4">Предпочтения по напиткам</label>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="alcohol" name="alcohol" value="yes" class="mr-2" onchange="toggleSection('drinks-section')">
+                        <label for="alcohol">Алкогольные</label>
+                    </div>
+                    <div id="drinks-section" class="hidden">
+                        <label for="alcohol-types" class="block">Ваши любимые напитки</label>
+                        <textarea id="alcohol-types" name="alcohol-preferences" class=" w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"> </textarea>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="non-alcohol" name="non-alcohol" value="yes" class="mr-2" onchange="toggleSection('non-drinks-section')">
+                        <label for="non-alcohol">Безалкогольные</label>
+                    </div>
+                    <div id="non-drinks-section" class="hidden">
+                        <label for="non-alcohol-types" class="block">Ваши любимые напитки</label>
+                        <textarea id="non-alcohol-types" name="non-alcohol-preferences" class=" w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"> </textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="tea" name="tea" value="yes" class="mr-2">
+                        <label for="tea">Буду только чай</label>
                     </div>
                 </div>
                 <button type="submit"
@@ -336,7 +348,7 @@
     </section>
 
     <!-- Контакты -->
-    <section class="bg-[#8FBC8F] text-white py-12">
+    <section class="bg-[#8FBC8F] text-white py-12 border-b border-white">
         <div class="max-w-4xl mx-auto px-4 text-center text-white">
             <h2 class="font-playfair text-3xl font-bold mb-8">По всем вопросам</h2>
             <div class="grid md:grid-cols-2 gap-8 mb-8">
@@ -354,7 +366,7 @@
     </section>
 
     <!-- Футер -->
-    <footer class="bg-[#7AAB7A] text-white py-8 text-center text-xl">
+    <footer class="bg-[#8FBC8F] text-white py-8 text-center text-xl ">
         <p>© 2025 Олег & Камила. Все права защищены.</p>
     </footer>
 
