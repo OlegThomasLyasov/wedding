@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Форма успешно отправлена!');
+                    alert('Заявка успешно отправлена. Спасибо!');
                     location.reload();
                 } else {
-                    throw new Error('Ошибка отправки формы');
+                    throw new Error('Не удалось отправить форму');
                 }
             })
             .catch(error => {
-                alert('Произошла ошибка: ' + error.message);
+                alert('Ошибка отправки формы');
             });
         });
     }
