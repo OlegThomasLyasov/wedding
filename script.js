@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isElementInViewport = (el) => {
       const rect = el.getBoundingClientRect();
       return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
       );
     };
     
