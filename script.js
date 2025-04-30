@@ -2,9 +2,6 @@ function scrollToBlock(id) {
     document.getElementById(id).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-// Иничиализация класса анимаций
-AOS.init();
-
 // Инициализация карты после загрузки страницы
 ymaps.ready(init);
 
@@ -130,3 +127,32 @@ const x = setInterval(function () {
         document.getElementById("countdown").innerHTML = "Время вышло!";
     }
 }, 1000);
+
+// анимации
+
+document.addEventListener('DOMContentLoaded', () => {
+    const animationBlocks = document.querySelectorAll('.animation-block');
+    
+    // Функция для проверки видимости элемента
+    const isElementInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75
+      );
+    };
+    
+    // Функция для запуска анимации
+    const runAnimation = () => {
+      animationBlocks.forEach(block => {
+        if (isElementInViewport(block)) {
+          const animationType = block.getAttribute('data-animation');
+          block.classList.add(`animate-${animationType}`);
+          block.style.opacity = '1'; // На случай, если анимация не сработает
+        }
+      });
+    };
+    
+    // Запускаем при загрузке и при прокрутке
+    runAnimation();
+    window.addEventListener('scroll', runAnimation);
+});
