@@ -138,18 +138,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = el.getBoundingClientRect();
       return (
         rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+        && rect.bottom >= 0
       );
     };
     
     // Функция для запуска анимации
     const runAnimation = () => {
-      animationBlocks.forEach(block => {
-        if (isElementInViewport(block)) {
-          const animationType = block.getAttribute('data-animation');
-          block.classList.add(`animate-${animationType}`);
-          block.style.opacity = '1'; // На случай, если анимация не сработает
-        }
-      });
+        animationBlocks.forEach(el => {
+            if (isElementInViewport(el)) {
+              const animationType = el.getAttribute('data-animation');
+              if (!el.classList.contains(`animate-${animationType}`)) {
+                el.classList.add(`animate-${animationType}`);
+                el.style.opacity = '1';
+              }
+            }
+        });
     };
     
     // Запускаем при загрузке и при прокрутке
