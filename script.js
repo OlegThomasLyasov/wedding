@@ -2,6 +2,9 @@ function scrollToBlock(id) {
     document.getElementById(id).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
+// Иничиализация класса анимаций
+AOS.init();
+
 // Инициализация карты после загрузки страницы
 ymaps.ready(init);
 
