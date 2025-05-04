@@ -29,12 +29,15 @@ function toggleSection(sectionId) {
 
 function toggleDrinksSection() {
     const drinksSection = document.getElementById('main-drinks-section');
+    const allergic = document.getElementById('allergic-section');
     const isAttending = document.getElementById('yes').checked;
     
     if (isAttending) {
         drinksSection.classList.remove('hidden');
+        allergic.classList.remove('hidden');
     } else {
         drinksSection.classList.add('hidden');
+        allergic.classList.add('hidden')
     }
 }
 
@@ -129,33 +132,93 @@ const x = setInterval(function () {
 }, 1000);
 
 // анимации
-
 document.addEventListener('DOMContentLoaded', () => {
-    const animationBlocks = document.querySelectorAll('.animation-block');
+    const flipElements = document.querySelectorAll('.animation-block');
     
-    // Функция для проверки видимости элемента
-    const isElementInViewport = (el) => {
-      const rect = el.getBoundingClientRect();
-      return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
-        && rect.bottom >= 0
-      );
+    const animateElement = (el) => {
+      const animationType = el.getAttribute('data-animation');
+      // Сбрасываем анимацию
+      el.style.animation = 'none';
+      el.offsetHeight; // Триггер reflow
+      // Применяем анимацию снова
+      el.classList.remove(`animate-${animationType}`);
+      setTimeout(() => {
+        el.classList.add(`animate-${animationType}`);
+        el.style.opacity = '1';
+      }, 10);
     };
     
-    // Функция для запуска анимации
-    const runAnimation = () => {
-        animationBlocks.forEach(el => {
-            if (isElementInViewport(el)) {
-              const animationType = el.getAttribute('data-animation');
-              if (!el.classList.contains(`animate-${animationType}`)) {
-                el.classList.add(`animate-${animationType}`);
-                el.style.opacity = '1';
-              }
-            }
-        });
+    const handleScroll = () => {
+      flipElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const isVisible = (
+          rect.top <= window.innerHeight * 0.8 &&
+          rect.bottom >= window.innerHeight * 0.2
+        );
+        
+        if (isVisible) {
+          animateElement(el);
+        } else {
+          // Сбрасываем стили при выходе из viewport
+          el.style.opacity = '0';
+          el.style.animation = 'none';
+        }
+      });
     };
     
-    // Запускаем при загрузке и при прокрутке
-    runAnimation();
-    window.addEventListener('scroll', runAnimation);
+    // Инициализация при загрузке
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+});
+
+// проверка на заполнение формы
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submitBtn');
+  const requiredInputs = form.querySelectorAll('input[required], .radio-group[required]');
+
+  form.addEventListener('input', checkFormValidity);
+
+  function checkFormValidity() {
+    let allValid = true;
+    requiredInputs.forEach(field => {
+      if (field.classList.contains('radio-group')) {
+        // Проверка radio-группы
+        const radioChecked = field.querySelector('input[type="radio"]:checked');
+        if (!radioChecked) allValid = false;
+      } else {
+        // Проверка обычных полей
+        if (!field.value.trim()) allValid = false;
+      }
+    });
+  
+    submitBtn.disabled = !allValid;
+    submitBtn.classList.toggle('bg-[#8456b3]', allValid);
+    submitBtn.classList.toggle('hover:bg-[#523982]', allValid);
+    submitBtn.classList.toggle('bg-[#ded3f5]', !allValid);
+  }
+});
+
+// Открытие модального окна
+function openModal(img) {
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImage');
+  const nodes = img.childNodes;
+
+  modal.classList.remove('hidden');
+  modalImg.src = nodes[1].src;
+
+  document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+}
+
+// Закрытие модального окна
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.classList.add('hidden');
+  document.body.style.overflow = 'auto'; // Возвращаем скролл
+}
+
+// Закрытие по клику вне изображения
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target.id === 'modal') closeModal();
 });
