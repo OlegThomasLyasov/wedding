@@ -133,42 +133,39 @@ const x = setInterval(function () {
 
 // анимации
 document.addEventListener('DOMContentLoaded', () => {
-    const flipElements = document.querySelectorAll('.animation-block');
-    
-    const animateElement = (el) => {
-      const animationType = el.getAttribute('data-animation');
-      // Сбрасываем анимацию
-      el.style.animation = 'none';
-      el.offsetHeight; // Триггер reflow
-      // Применяем анимацию снова
-      el.classList.remove(`animate-${animationType}`);
-      setTimeout(() => {
-        el.classList.add(`animate-${animationType}`);
-        el.style.opacity = '1';
-      }, 10);
-    };
-    
-    const handleScroll = () => {
-      flipElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        const isVisible = (
-          rect.top <= window.innerHeight * 0.8 &&
-          rect.bottom >= window.innerHeight * 0.2
-        );
-        
-        if (isVisible) {
-          animateElement(el);
-        } else {
-          // Сбрасываем стили при выходе из viewport
-          el.style.opacity = '0';
-          el.style.animation = 'none';
+  const flipElements = document.querySelectorAll('.animation-block');
+  
+  // Более надежная функция проверки видимости
+  const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+      rect.bottom >= 0
+    );
+  };
+  
+  // Функция для обработки анимаций
+  const handleAnimations = () => {
+    flipElements.forEach(el => {
+      if (isElementInViewport(el)) {
+        const animationType = el.getAttribute('data-animation');
+        if (!el.classList.contains(`animate-${animationType}`)) {
+          el.classList.add(`animate-${animationType}`);
+          el.style.opacity = '1';
         }
-      });
-    };
-    
-    // Инициализация при загрузке
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
+      } else {
+        // Опционально: сброс анимации при выходе из viewport
+        const animationType = el.getAttribute('data-animation');
+        el.classList.remove(`animate-${animationType}`);
+        el.style.opacity = '0';
+      }
+    });
+  };
+  
+  // Запускаем при загрузке и при скролле
+  handleAnimations();
+  window.addEventListener('scroll', handleAnimations);
+  window.addEventListener('resize', handleAnimations);
 });
 
 // проверка на заполнение формы
@@ -201,14 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Открытие модального окна
 function openModal(img) {
-  const modal = document.getElementById('modal');
-  const modalImg = document.getElementById('modalImage');
-  const nodes = img.childNodes;
-
-  modal.classList.remove('hidden');
-  modalImg.src = nodes[1].src;
-
-  document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+  if (window.innerWidth >= 1000) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImage');
+    const nodes = img.childNodes;
+  
+    modal.classList.remove('hidden');
+    modalImg.src = nodes[1].src;
+  
+    document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+  }
 }
 
 // Закрытие модального окна

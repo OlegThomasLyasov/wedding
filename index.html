@@ -84,6 +84,10 @@
             z-index: -1;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         .font-playfair {
             font-family: 'Playfair Display', serif;
         }
@@ -195,7 +199,7 @@
                 <h3 class="font-playfair text-2xl text-gray-800 font-bold mb-4">Место проведения</h3>
                 <p class="text-xl text-gray-700 mb-2">Ресторан "Хотим-едим"</p>
                 <p class="text-xl text-gray-700 mb-2">г. Уфа, ул. Красивая поляна 4/1</p>
-                <a class="text-xl text-[#6c3982] transition underline cursor-pointer"
+                <a class="text-xl text-[#6c3982] hover:text-[#523982] transition underline cursor-pointer"
                     onclick="scrollToBlock('mapTitle')">Посмотреть на
                     карте</a>
             </div>
@@ -322,22 +326,22 @@
         </h2>
         <div id="map" class="px-4 max-w-7xl mx-auto"></div>
         <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 pt-12 px-4">
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/1.webp" class="w-full h-full">
             </div>
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/2.webp" class="w-full h-full">
             </div>
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/3.webp" class="w-full h-full">
             </div>
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/4.webp" class="w-full h-full">
             </div>
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/5.webp" class="w-full h-full">
             </div>
-            <div data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden">
+            <div onclick="openModal(this)" data-animation="fade-in" class="animation-block opacity-0 transition-all duration-500 aspect-square rounded-lg overflow-hidden cursor-pointer">
                 <img src="./images/hotimEdim/6.webp" class="w-full h-full">
             </div>
         </div>
@@ -386,7 +390,7 @@
                     </div>
                 </div>
                 <div id="main-drinks-section" class="hidden">
-                    <label class="block mb-4">Предпочтения по напиткам</label>
+                    <label class="block mb-4">Предпочтения по напиткам:</label>
                     <div class="flex items-center mb-2">
                         <input type="checkbox" id="alcohol" name="alcohol" value="yes" class="mr-2"
                             onchange="toggleSection('drinks-section')">
@@ -395,7 +399,7 @@
                     <div id="drinks-section" class="hidden">
                         <label for="alcohol-types" class="block">Ваши любимые напитки</label>
                         <textarea placeholder="Пожалуйста, укажите все важные для вас детали — это поможет нам точно приобрести нужные напитки" id="alcohol-types" name="alcohol-preferences"
-                            class="w-full text-lg px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"></textarea>
+                            class="w-full min-h-32 text-lg px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"></textarea>
                     </div>
                     <div class="flex items-center mb-2">
                         <input type="checkbox" id="non-alcohol" name="non-alcohol" value="yes" class="mr-2"
@@ -413,10 +417,10 @@
                     </div>
                 </div>
                 <div id="allergic-section" class="hidden">
-                    <label for="allergic" class="block mb-4">Есть ли у Вас аллергия</label>
+                    <label for="allergic" class="block mb-4">Есть ли у Вас аллергия?</label>
                     <textarea id="allergic" name="allergic"
                         placeholder="Пожалуйста, укажите продукты, на которые у Вас аллергия"
-                        class="w-full text-lg px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"></textarea>
+                        class="w-full min-h-28 text-lg px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"></textarea>
                 </div>
                 <button type="submit" 
                     id="submitBtn"
