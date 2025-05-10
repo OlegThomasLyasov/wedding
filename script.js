@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Открытие модального окна
 function openModal(img) {
-  if (window.innerWidth >= 1000) {
+  if (window.innerWidth) {
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImage');
     const nodes = img.childNodes;
